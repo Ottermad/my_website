@@ -422,7 +422,7 @@ def update_project(id):
         values = [
             project.title.strip("\n"),
             project.description.replace("\r\n", "|"),
-            project.link.strip("\n")[:-1]
+            project.link.strip("\n")
         ]
         context = {
             "form": form,
