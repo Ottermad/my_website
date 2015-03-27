@@ -51,6 +51,19 @@ body {
 	width: 15%;
 }
 
+.toggle-line {
+	background: #000000;
+	border: 5px #000000;
+	border-radius: 10%;
+}
+
+.navbar-my-toggle {
+	float: right;
+	background: none;
+	border: 0;
+	margin-right: 5%;
+	margin-top: 2%;
+}
 
 @media(max-width:767px){
 	/* Styles */

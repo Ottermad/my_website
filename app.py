@@ -424,7 +424,7 @@ def update_project(id):
         print(repr(project.description))
         values = [
             project.title.strip("\n"),
-            project.description.replace("\n", "|"),
+            project.description.replace("\r\n", "|"),
             project.link.strip("\n")[:-1]
         ]
         context = {
