@@ -1,0 +1,64 @@
+header {
+    text-align: center;
+}
+
+.form-control {
+    width: 40%;
+	margin-bottom: 0.3em;
+}
+
+#body {
+    height: 20em;
+}
+
+#description {
+	height: 20em;
+	width: 100%;
+}
+
+.date {
+	color: #000000;
+}
+
+body {
+    font-size: 20px;
+/*    font-family: 'Indie Flower', cursive;
+	font-family: 'Abel', sans-serif;*/
+	font-family: 'Raleway', sans-serif;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+	border: none;
+}
+
+.footer {
+	margin-top: 5px;
+	padding-top: 19px;
+  	color: #777;
+  	border-top: 1px solid #e5e5e5;
+}
+
+.view-btn {
+	margin-bottom: 3px;
+}
+
+.link {
+	word-wrap: break-word;
+}
+
+#treehouse-logo {
+	float: right;
+	width: 15%;
+}
+
+
+@media(max-width:767px){
+	/* Styles */
+	body {
+		padding-top: 70px;
+	}
+
+	.form-control {
+		width: 100%;
+	}
+}

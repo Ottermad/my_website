@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block body %}
+	<h3>Projects</h3>
+    <ul>
+       
+        {% for project in projects %}
+            <li>
+                <h4>
+                    {{ project["title"] }}
+                </h4>
+
+                <p>
+                	<a href="{{ project["link"] }}" class="link">
+                		{{ project["link"] }}
+                	</a>
+                </p>
+                <a class="btn btn-info view-btn {{ project.id|string + "Toggle" }}" role="button" href="#">
+                  View Description
+                </a>
+                {% if current_user.is_authenticated() %}
+                   <button class="btn btn-warning" onclick="location.href='{{ url_for("update_project", id=project.id) }}'">
+                       Edit
+                   </button>
+                    <button class="btn btn-danger" onclick="location.href='{{ url_for("delete_project", id=project.id) }}'">
+                        Delete
+                    </button>
+                {% endif %}
+                <ul class="{{ project.id|string + "Menu" }}">
+                    <li>
+                        {{ project["description"] }}
+                    </li>
+                </ul>
+
+            </li>
+        {% endfor %}
+    </ul>
+    {% if current_user.is_authenticated() %}
+        <button class="btn btn-success btn-lg" onclick="location.href='{{ url_for("add_project") }}'">Add A Project</button>
+    {% endif %}
+{% endblock %}
+{% block extra_js %}
+    <script>
+        $(document).ready(function(){
+            function hide_all () {
+                // body...
+                {% for project in projects %}
+                    if ($(".{{ project.id|string + "Toggle" }}").text() == "Hide Description") {
+                        $(".{{ project.id|string + "Toggle" }}").text("View Description");
+                        $(".{{ project.id|string + "Menu" }}").toggle(500);
+                    }
+                {% endfor %}
+            }
+            {% for project in projects %}
+                $(".{{ project.id|string + "Menu" }}").toggle(500);
+                $(".{{ project.id|string + "Toggle" }}").click(function(e){
+                    if ($(".{{ project.id|string + "Toggle" }}").text() == "Hide Description") {
+                        $(".{{ project.id|string + "Menu" }}").toggle(500);
+                        $(".{{ project.id|string + "Toggle" }}").text("View Description");
+                    } else {
+                        hide_all()
+                        $(".{{ project.id|string + "Menu" }}").toggle(500);
+                        $(".{{ project.id|string + "Toggle" }}").text("Hide Description");
+                    }
+                    e.preventDefault();
+                });
+            {% endfor %}
+        });
+    </script>
+{% endblock %}

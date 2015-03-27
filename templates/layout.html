@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="bootstrap.min.css") }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="bootstrap-theme.min.css") }}">
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="flat-ui.min.css") }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="style.css") }}">
+        <title>{% block title %}Charles Thomas | Developer {% endblock %}</title>
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+
+        <script src="{{ url_for("static", filename="Chart.min.js" )}}"></script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="container theme-showcase">
+            <header>
+                <div class="hidden-xs">
+                <h1>Charles Thomas</h1>
+                <h2>Developer</h2>
+                <p>
+                    |
+                    <a href="{{ url_for("index") }}">
+                        BLOG
+                    </a>
+                    |
+                    <a href="{{ url_for("about") }}">
+                        ABOUT
+                    </a>
+                    |
+                    <a href="{{ url_for("portfolio") }}">
+                        PORTFOLIO
+                    </a>
+                    |
+                    <a href="{{ url_for("points") }}">
+                        TEAM TREEHOUSE
+                    </a>
+                    |
+                    <a href="{{ url_for("contact") }}">
+                        CONTACT
+                    </a>
+                    |
+                    {% if current_user.is_authenticated()%}
+                        <a href="{{ url_for("logout") }}">
+                            LOGOUT
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for("login") }}">
+                            LOGIN
+                        </a>
+                    {% endif %}
+                    |
+                </p>
+                </div>
+                <nav class="navbar navbar-default hidden-sm hidden-md hidden-lg navbar-fixed-top">
+                  <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="#">Charles Thomas</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="{{ url_for("index") }}">
+                                    BLOG
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for("about") }}">
+                                    ABOUT
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="{{ url_for("portfolio") }}">
+                                    PORTFOLIO
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for("points") }}">
+                                    TEAM TREEHOUSE
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for("contact") }}">
+                                    CONTACT
+                                </a>
+                            </li>
+                            <li>
+                                {% if current_user.is_authenticated() %}
+                                    <a href="{{ url_for("logout") }}">
+                                        LOGOUT
+                                    </a>
+                                {% else %}
+                                    <a href="{{ url_for("login") }}">
+                                        LOGIN
+                                    </a>
+                                {% endif %}
+                            </li>    
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                  </div><!-- /.container-fluid -->
+                </nav>
+                
+            </header>
+            {% block body %}
+            {% endblock %}
+            <p class="footer">
+                &copy; Charles Thomas 2015
+                <br>
+                <small>With thanks to <a href="http://designmodo.com/flat-free/">Designmodo</a></small>
+            </p>
+
+        </div>
+        
+        
+        {% for message in get_flashed_messages() %}
+            <script>
+                alert("{{ message }}");
+            </script>
+        {% endfor %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        <script src="{{ url_for("static", filename="bootstrap.min.js") }}"></script>
+        {% block extra_js %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+    <h3>Posts</h3>
+    <table class="table-responsive table">
+       
+        {% for post in posts %}
+            <tr>
+                <td {% if current_user.is_authenticated() %}colspan="3"{% endif %} class="cleantable">
+                    {{ post.title }} - {{ post.posted_at }}
+                </td>
+
+                    <td>
+                        <button class="btn btn-info btn-lg" onclick="location.href='{{ url_for("post", id=post.id) }}'">
+                            View
+                        </button>
+                    </td>
+
+                {% if current_user.is_authenticated() %}
+
+                    <td>
+                        <button class="btn btn-warning btn-lg" onclick="location.href='{{ url_for("update", id=post.id) }}'">
+                            Edit
+                        </button>
+                    </td>
+
+                    <td>
+                        <button class="btn btn-danger btn-lg" onclick="location.href='{{ url_for("delete", id=post.id) }}'">
+                            Delete
+                        </button>
+                    </td>
+
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    {% if current_user.is_authenticated() %}
+        <button class="btn btn-success btn-lg" onclick="location.href='{{ url_for("add") }}'">Add A Post</button>
+    {% endif %}
+{% endblock %}
