@@ -1,0 +1,222 @@
+body {
+	margin: 0;
+	font-family: 'Arvo', serif;
+	font-size: 12px;
+}
+
+.main {
+	max-width: 80%;
+	margin-right: 10%;
+	margin-left: 10%;
+	font-size: 1.5em;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	height: 100%;
+}
+
+button, .btn {
+	padding: 0.5em;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	font-family: 'Arvo', serif;
+	font-size: 1.1em;
+}
+
+.btn-warning {
+	background-color: #FFC107;
+}
+
+.btn-danger {
+	background-color: #F44336;
+}
+
+a, a:visited {
+	color: #66BB6A;
+}
+
+/* Navigation Styles */
+
+#site-nav {
+	background: #03A9F4;
+	margin: 0;
+	padding: 2em;
+	font-size: 1.3em;
+}
+
+#site-nav > * {
+	display: inline;
+}
+
+
+#site-nav > div > div  > ul > li {
+	display: inline;
+	margin-right: 1em;
+}
+
+#site-nav > div > div > ul > li > a, #site-nav > ul > li > a:visited, #site-nav > h1 {
+	color: white;
+	text-decoration: none;
+}
+
+.v-wrap {
+    height: 100%;
+    white-space: nowrap;
+    text-align: center;
+}
+.v-wrap:before{
+    content: ..;
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    /* adjust for white space between pseudo element and next sibling */
+    margin-right: -.25em;
+    /* stretch line height */
+    height: 100%; 
+}
+.v-box{
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+}
+
+/* Show Posts Styles */
+
+#posts-table {
+	border-spacing: 2em;
+}
+
+#posts-table .btn {
+	/*font-size: 1em;*/
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+/* Post Styles */
+
+/* Form Styles */
+
+/* Portfolio Styles */
+
+#portfolio-listing {
+	list-style: none;
+	list-style-type: none;
+	padding: 0;
+	max-width: 80%
+}
+
+
+#portfolio-listing > li {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#portfolio-listing > li > ul {
+	list-style: none;
+	list-style-type: none;
+	padding: 0;
+
+}
+
+#portfolio-listing > li > ul > li {
+	list-style: none;
+	list-style-type: none;
+	margin-bottom: 1.5em;
+	margin-top: 1.5em;
+}
+
+#portfolio-listing > li > ul > li > ul {
+	border-bottom: 0.1em solid #B0BEC5;
+}
+
+#portfolio-listing .btn {
+	text-decoration: none;
+	margin-right: 1em;
+}
+
+.projectLink {
+	word-wrap: break-word;
+}
+
+/* Points Page Style */
+#treehouse-data > section {
+	display: inline;
+	width: 50%
+}
+
+#treehouse-data > section > * {
+	display: inline;
+}
+
+#points {
+	float: left;
+	display: inline;
+}
+
+.Ruby { color:#F7464A;}
+.Android { color:#51B46D;}
+.JavaScript { color:#C25975;}
+.Python { color:#F092B0;}
+.HTML { color:#39ADD1;}
+.CSS { color:#3079AB;}
+.PHP { color:#7D669E;}
+.Development-Tools { color:#637A91;}
+.Business { color:#F9845B;}
+.iOS { color:#53BBB4;}
+.Design { color:#E0AB18;}
+.Java { color:#2C9676;}
+.WordPress { color:#838CC7;}
+.Digital-Literacy { color:#C38CD4;}
+
+label,input {display: block; padding-bottom: 0.2em;}
+fieldset {
+	border: none;
+}
+
+html, body {height: 100%;}
+
+#wrap {min-height: 100%;}
+
+.main {overflow:auto;
+	padding-bottom: 3em;}  /* must be same height as the footer */
+
+footer {position: relative;
+	margin-top: -3em; /* negative value of footer height */
+	height: 3em;
+	clear:both;} 
+
+/*Opera Fix*/
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;/
+}
+
+.hide-all {
+	display: none;
+}
+
+/* Media Queries */
+@media (max-width: 1080px) { 
+	.hide {
+		display: none;
+	}
+
+	#site-nav > h1 {
+		text-align: center;
+		display: block;
+		clear: both;
+	}
+
+	#site-nav > div > div > ul:last-child {
+		text-align: left;
+	}
+
+	.v-wrap {
+	    text-align: left;
+	}
+}

@@ -68,7 +68,7 @@ class Post(BaseModel):
             post_dict = {
                 "id": post.id,
                 "title": post.title,
-                "posted_at": post.posted_at.strftime("%d-%m-%y"),
+                "posted_at": post.posted_at.strftime("%d/%m/%y"),
                 "body": post.body
             }
             posts.append(post_dict)

@@ -45,7 +45,7 @@ NUMBER_OF_COURSES = 12
 TREEHOUSE_USER = "charliethomas"
 
 app = Flask(__name__)
-app.secret_key = ""
+app.secret_key = "nf;en;p"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -53,6 +53,9 @@ login_manager.login_view = "login"
 
 
 # Functions
+def remove_space(string):
+    return string.replace(" ","-")
+
 def get_points():
     try:
         my_request = requests.get(
@@ -227,14 +230,15 @@ def portfolio():
 
 @app.route("/points")
 def points():
-    points = order_points(get_points())
+    """points = order_points(get_points())
     courses = get_courses(NUMBER_OF_COURSES)
     context = {
         "points": points,
         "courses": courses,
-        "colors": COLORS
-    }
-    return render_template("points.html", **context)
+        "colors": COLORS,
+        "username": TREEHOUSE_USER,
+    }"""
+    return render_template("points.html", username=TREEHOUSE_USER)
 
 
 @app.route("/contact", methods=["POST", "GET"])
@@ -496,4 +500,5 @@ def post_json():
     return jsonify(results=posts)
 
 if __name__ == "__main__":
-    app.run()
+    app.jinja_env.filters['remove_space'] = remove_space
+    app.run(debug=True)

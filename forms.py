@@ -31,6 +31,6 @@ class PostForm(Form):
 
 
 class ContactForm(Form):
-    name = StringField("Name", validators=[DataRequired()])
+    name = StringField("Name",validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired(), Email()])
     body = TextAreaField("Body", validators=[DataRequired()])

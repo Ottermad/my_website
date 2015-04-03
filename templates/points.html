@@ -1,12 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div class="row">
-        <section class="col-md-12">
-            <h3>My Treehouse Points</h3>
-            <p>
-                I have been learning web and mobile development using Team Treehouse.
-            </p>
-            <img id="treehouse-logo" class="img-respon" src="{{ url_for("static", filename="logo.png") }}" alt="Team Treehouse Logo">
+    <section id="treehouse-description">
+        <h3>My Treehouse Points</h3>
+        <p>
+            I have been learning web and mobile development using Team Treehouse.
+        </p>
+        <div id="treehouse-quote" class="hide">
             <p>
                 From Team Treehouse I have chosen this quote to sum up what Team Treehouse offers:
                 <blockquote>
@@ -15,30 +14,53 @@
                     Through 1000+ video tutorials, quizzes, and code challenges created by expert teachers,students can learn to code in languages like Objective-C, HTML, CSS, PHP, Ruby,JavaScript and SQL.
                 </blockquote>
             </p>
-        </section>
-    </div>
-    <div class="row">
-        <section id="points" class="col-md-6">
+        </div>
+    </section>
+    <div id="treehouse-data">
+        <section id="points" class="col-md-6 hide-all" style="display: none;">
             <h4>My points</h4>
-            <canvas id="myChart" width="400" height="400"></canvas>
-            <!--<ul>
+            <!--<canvas id="myChart" width="400" height="400"></canvas>
+            <ul>
 
             </ul>-->
+            <table class="">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody id="points-tbody">
+                    <!--{% set first_item = True %}
+                    {% for item in points %}
+                        {% if not first_item %}
+                            <tr class="{{ item[0]|remove_space }}">
+                                <td>{{ item[0] }}</td>
+                                <td>{{ item[1] }}</td>
+                            </tr>
+                        {% else %}
+                            {% set first_item = False %}
+                        {% endif %}
+                    {% endfor %}-->
+                </tbody>
+            </table>
         </section>
-        <section id="badges" class="col-md-6">
-        <h4>My recent badges</h4>
-        <ul>
-            {% for course in courses %}
-                <li>
-                    {{ course["name"] }}
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
+        <div class="hide">
+            <section id="badges" class="col-md-6 hide hide-all">
+                <h4>My recent badges</h4>
+                <ul id="badges-ul">
+                    <!--{% for course in courses %}
+                        <li>
+                            {{ course["name"] }}
+                        </li>
+                    {% endfor %}-->
+                </ul>
+            </section>
+        </div>
     </div>
 {% endblock %}
 {% block extra_js %}
-    <script>
+    <!--<script>
             // pie chart data
             var pieData = [
                 {% set first_item = True %}
@@ -63,5 +85,88 @@
             var countries= document.getElementById("myChart").getContext("2d");
             // draw pie chart
             new Chart(countries).Doughnut(pieData, pieOptions);
+    </script>-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            colors = {
+                "Ruby": "#F7464A",
+                "Android": "#51B46D",
+                "JavaScript": "#C25975",
+                "Python": "#F092B0",
+                "HTML": "#39ADD1",
+                "CSS": "#3079AB",
+                "PHP": "#7D669E",
+                "Development Tools": "#637A91",
+                "Business": "#F9845B",
+                "iOS": "#53BBB4",
+                "Design": "#E0AB18",
+                "Java": "#2C9676",
+                "WordPress": "#838CC7",
+                "Digital Literacy": "#C38CD4",
+            };
+            var pointsRequest = new XMLHttpRequest();
+            //var badgesRequest = new XMLHttpRequest();
+
+            pointsRequest.onreadystatechange = function () {
+                // Parse JSON
+                // Get response body
+                var json = pointsRequest.responseText;
+
+                // Parse into JSON
+                json = JSON.parse(json);
+
+                var points = json["points"];
+                console.log(Object.keys(points).length);
+                var tableInnerHTML = "";
+
+                for (var i = 0; i < Object.keys(points).length; i++) {
+                    if (i > 0) {
+                        name = Object.keys(points)[i];
+                        tableInnerHTML = "<tr class='" + name.replace(" ", "-") + "'><td>" + name +"</td><td>" + points[name] + "</td></tr>" + tableInnerHTML;
+                    }
+                }
+
+                console.log(tableInnerHTML);
+
+                var badges = json["badges"];
+                var newest_badges = "";
+
+                for (var i = badges.length - 11; i < badges.length; i++) {
+                    newest_badges = "<li>" + badges[i]["name"] + "</li>" + newest_badges;
+                }
+                var ul = document.getElementById("badges-ul");
+                ul.innerHTML = newest_badges;
+
+                var tbody = document.getElementById("points-tbody");
+                tbody.innerHTML = tableInnerHTML;
+
+                $("#badges").removeClass("hide-all");
+                $("#points").removeClass("hide-all");
+                $("#points").removeAttr("style");
+
+                
+
+            };
+
+            /*badgesRequest.onreadystatechange (function () {
+                if (badgesRequest.readystate == 4 && badgesRequest.status == 200) {
+                    var json = badgesRequest.responseText;
+                    json = JSON.parse(json);
+
+                    var badges = json["badges"];
+                    var newest_badges = "";
+
+                    for (var i = badges.length - 11; i < badges.length; i++) {
+                        newest_badges = "<li>" + badges[i]["name"] + "</li>" + newest_badges;
+                    }
+
+                    var ul = document.getElementById("badges-ul");
+                    ul.innerHTML = newest_badges;
+                }
+            });*/
+
+            pointsRequest.open("GET", "http://teamtreehouse.com/{{ username }}.json", true); 
+            pointsRequest.send();
+        });
     </script>
 {% endblock %}
