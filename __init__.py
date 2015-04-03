@@ -246,7 +246,7 @@ def contact():
     form = forms.ContactForm()
     if form.validate_on_submit():
         sendgrid_object = sendgrid.SendGridClient(
-            "Ottermad", "OttersR0ck")
+            "", "")
         message = sendgrid.Mail()
         sender = form.email.data
         subject = form.name.data
