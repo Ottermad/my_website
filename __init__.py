@@ -325,7 +325,9 @@ def update(id):
         return redirect(url_for("index"))
     else:
         ids = [form.title.id, form.description.id]
-        values = [post.title, post.body.replace("\n", "|")]
+        body = post.body.replace("\n", "|").replace("\r", "")
+	print(body)
+	values = [post.title, body]
         context = {
             "form": form,
             "ids": ids,
