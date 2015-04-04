@@ -144,7 +144,7 @@ def after_request(response):
     g.db.close()
     return response
 
-
+@app.route("/login/", methods=("GET", "POST"))
 @app.route("/login", methods=("GET", "POST"))
 def login():
     form = forms.LoginForm()
@@ -162,7 +162,7 @@ def login():
                 flash("Your email or password does not exist.", "error")
     return render_template("login.html", form=form)
 
-
+@app.route("/logout/")
 @app.route("/logout")
 @login_required
 def logout():
@@ -170,7 +170,7 @@ def logout():
     flash("You've been logged out. Come back soon.")
     return redirect(url_for("index"))
 
-
+@app.route("/new_post/", methods=("POST", "GET"))
 @app.route("/new_post", methods=("POST", "GET"))
 @login_required
 def new_post():
@@ -185,7 +185,7 @@ def new_post():
         return redirect(url_for("index"))
     return render_template("add_post.html", form=form)
 
-
+@app.route("/new_project/", methods=("POST", "GET"))
 @app.route("/new_project", methods=("POST", "GET"))
 @login_required
 def new_project():
@@ -207,12 +207,14 @@ def index():
     return render_template("show.html", posts=posts)
 
 
+@app.route("/about/")
 @app.route("/about")
 def about():
     """Route for about page"""
     return render_template("about.html")
 
 
+@app.route("/portfolio/")
 @app.route("/portfolio")
 def portfolio():
     """Route for portfolio page"""
@@ -228,6 +230,7 @@ def portfolio():
     return render_template("portfolio.html", **context)
 
 
+@app.route("/points/")
 @app.route("/points")
 def points():
     """points = order_points(get_points())
@@ -241,6 +244,7 @@ def points():
     return render_template("points.html", username=TREEHOUSE_USER)
 
 
+@app.route("/contact/", methods=["POST", "GET"])
 @app.route("/contact", methods=["POST", "GET"])
 def contact():
     form = forms.ContactForm()
@@ -262,6 +266,7 @@ def contact():
         return render_template("contact.html", form=form)
 
 
+@app.route("/post/<id>/")
 @app.route("/post/<id>")
 def post(id):
     """Page for each post. It shows the title and body of a given post.
@@ -288,6 +293,7 @@ def post(id):
     return render_template("post.html", **context)
 
 
+@app.route("/update/<id>/", methods=["POST", "GET"])
 @app.route("/update/<id>", methods=["POST", "GET"])
 @login_required
 def update(id):
@@ -337,6 +343,7 @@ def update(id):
         return render_template("update_post.html", **context)
 
 
+@app.route("/delete/<id>/")
 @app.route("/delete/<id>")
 @login_required
 def delete(id):
@@ -350,6 +357,7 @@ def delete(id):
     return redirect(url_for("index"))
 
 
+@app.route("/add/", methods=["POST", "GET"])
 @app.route("/add", methods=["POST", "GET"])
 @login_required
 def add():
@@ -389,6 +397,7 @@ def add():
         return render_template("add_post.html", form=form)
 
 
+@app.route("/update_project/<id>/", methods=["POST", "GET"])
 @app.route("/update_project/<id>", methods=["POST", "GET"])
 @login_required
 def update_project(id):
@@ -440,6 +449,7 @@ def update_project(id):
         return render_template("update_project.html", **context)
 
 
+@app.route("/delete_project/<id>/")
 @app.route("/delete_project/<id>")
 @login_required
 def delete_project(id):
@@ -461,6 +471,7 @@ def delete_project(id):
     return redirect(url_for("portfolio"))
 
 
+@app.route("/add_project/", methods=["POST", "GET"])
 @app.route("/add_project", methods=["POST", "GET"])
 @login_required
 def add_project():
@@ -497,7 +508,7 @@ def add_project():
     else:
         return render_template("add_project.html", form=form)
 
-
+@app.route("/post_json/", methods=["POST", "GET"])
 @app.route("/post_json", methods=["POST", "GET"])
 def post_json():
     posts = models.Post.get_posts()[::-1]
