@@ -32,13 +32,9 @@
                     {% endif %}
                 </tr>
             {% endfor %}
-            <tr>
-                <td>
-                    {% if current_user.is_authenticated() %}
-                        <button class="btn btn-success btn-lg" onclick="location.href='{{ url_for("add") }}'">Add A Post</button>
-                    {% endif %}
-                </td>
-            </tr>
         </tbody>
     </table>
+    {% if current_user.is_authenticated() %}
+        <button class="btn btn-success btn-lg" onclick="location.href='{{ url_for("add") }}'">Add A Post</button>
+    {% endif %}
 {% endblock %}

@@ -6,23 +6,17 @@
             I have been learning web and mobile development using Team Treehouse.
         </p>
         <div id="treehouse-quote" class="hide">
-            <p>
-                From Team Treehouse I have chosen this quote to sum up what Team Treehouse offers:
-                <blockquote>
-                    As members of the Treehouse community, students can learn to build websites, create iPhone and Android apps, build web apps with Ruby on Rails and PHP, learn about user experience, how to start a business, and much more.
+            <p>From Team Treehouse I have chosen this quote to sum up what Team Treehouse offers:</p>
+            <blockquote>
+                As members of the Treehouse community, students can learn to build websites, create iPhone and Android apps, build web apps with Ruby on Rails and PHP, learn about user experience, how to start a business, and much more.
 
-                    Through 1000+ video tutorials, quizzes, and code challenges created by expert teachers,students can learn to code in languages like Objective-C, HTML, CSS, PHP, Ruby,JavaScript and SQL.
-                </blockquote>
-            </p>
+                Through 1000+ video tutorials, quizzes, and code challenges created by expert teachers,students can learn to code in languages like Objective-C, HTML, CSS, PHP, Ruby,JavaScript and SQL.
+            </blockquote>
         </div>
     </section>
     <div id="treehouse-data">
         <section id="points" class="col-md-6 hide-all" style="display: none;">
             <h4>My points</h4>
-            <!--<canvas id="myChart" width="400" height="400"></canvas>
-            <ul>
-
-            </ul>-->
             <table class="">
                 <thead>
                     <tr>
@@ -39,43 +33,12 @@
             <section id="badges" class="col-md-6 hide hide-all">
                 <h4>My recent badges</h4>
                 <ul id="badges-ul">
-                    <!--{% for course in courses %}
-                        <li>
-                            {{ course["name"] }}
-                        </li>
-                    {% endfor %}-->
                 </ul>
             </section>
         </div>
     </div>
 {% endblock %}
 {% block extra_js %}
-    <!--<script>
-            // pie chart data
-            var pieData = [
-                {% set first_item = True %}
-                {% for item in points %}
-                    {% if not first_item %}
-                        {
-                            label: "{{ item[0] }}",
-                            value: {{ item[1] }},
-                            color: "{{ colors[item[0]] }}"
-                        },
-                    {% else %}
-                        {% set first_item = False %}
-                    {% endif %}
-                {% endfor %}
-            ];
-            // pie chart options
-            var pieOptions = {
-                 segmentShowStroke : true,
-                 animateScale : true
-            }
-            // get pie chart canvas
-            var countries= document.getElementById("myChart").getContext("2d");
-            // draw pie chart
-            new Chart(countries).Doughnut(pieData, pieOptions);
-    </script>-->
     <script type="text/javascript">
         $(document).ready(function () {
             colors = {
@@ -137,24 +100,6 @@
                 
 
             };
-
-            /*badgesRequest.onreadystatechange (function () {
-                if (badgesRequest.readystate == 4 && badgesRequest.status == 200) {
-                    var json = badgesRequest.responseText;
-                    json = JSON.parse(json);
-
-                    var badges = json["badges"];
-                    var newest_badges = "";
-
-                    for (var i = badges.length - 11; i < badges.length; i++) {
-                        newest_badges = "<li>" + badges[i]["name"] + "</li>" + newest_badges;
-                    }
-
-                    var ul = document.getElementById("badges-ul");
-                    ul.innerHTML = newest_badges;
-                }
-            });*/
-
             pointsRequest.open("GET", "http://teamtreehouse.com/{{ username }}.json", true); 
             pointsRequest.send();
         });

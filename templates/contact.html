@@ -1,13 +1,25 @@
 {% from "macros.html" import render_field %}
 {% extends "layout.html" %}
 {% block body %}
-    <form method="POST" class="form">
-		{{ form.hidden_tag() }}
-		{% for field in form %}
-			{{ render_field(field) }}
-		{% endfor %}
-		<fieldset>
-			<button type="submit" id="submit" class="btn btn-success btn-lg">Contact Us</button>
-		</fieldset>
-	</form>
+	<h3>Contact Me</h3>
+	<p>You can contact me using the form below or using one of the methods also listed.</p>
+	<section id="contact-form">
+		 <form method="POST" class="form">
+			{{ form.hidden_tag() }}
+			{% for field in form %}
+				{{ render_field(field) }}
+			{% endfor %}
+			<fieldset>
+				<button type="submit" id="submit" class="btn btn-success btn-lg">Contact Us</button>
+			</fieldset>
+		</form>
+	</section>
+	<section id="contact-details">
+		<ul>
+			<li>Twitter: <a href="https://twitter.com/AttwoodCharlie">@AttwoodCharlie</a></li>
+			<li>Email: <a href="mailto:charlie.thomas@attwoodthomas.net">charlie.thomas@attwoodthomas.net</a></li>
+			<li>Phone: <a href="tel:+447795958759">+447795958758</a></li>
+		</ul>
+	</section>
+   
 {% endblock %}

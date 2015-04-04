@@ -326,8 +326,8 @@ def update(id):
     else:
         ids = [form.title.id, form.description.id]
         body = post.body.replace("\n", "|").replace("\r", "")
-	print(body)
-	values = [post.title, body]
+        print(body)
+        values = [post.title, body]
         context = {
             "form": form,
             "ids": ids,

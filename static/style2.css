@@ -200,6 +200,26 @@ body:before {
 	display: none;
 }
 
+#contact-form > form > label, #contact-form > form > input, #contact-form > form {
+	display: inline;
+}
+
+#contact-form {
+	display: inline;
+	width: 50%;
+	float: left;
+}
+
+#contact-details {
+	display: inline;
+}
+
+#contact-details > ul {
+	list-style: none;
+	list-style-type: none;
+	padding: 0;
+}
+
 /* Media Queries */
 @media (max-width: 1080px) { 
 	.hide {
@@ -218,5 +238,15 @@ body:before {
 
 	.v-wrap {
 	    text-align: left;
+	}
+
+	#contact-form {
+		display: block;
+		width: 100%;
+		clear: both;
+	}
+
+	#contact-details {
+		display: block;
 	}
 }
