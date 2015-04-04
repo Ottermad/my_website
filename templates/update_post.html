@@ -12,8 +12,14 @@
 {% block extra_js %}
 	<script type="text/javascript">
 		$(document).ready(function(){
+			function escapeRegExp(string) {
+			    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+			}
+			function replaceAll(string, find, replace) {
+			 	return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+			}
             {% for id in ids %}
-                $("#{{id}}").val("{{values[loop.index0]}}");
+                $("#{{id}}").val(replaceAll("{{values[loop.index0]}}", "|", "\n"));
             {% endfor %}
         });
 	</script>

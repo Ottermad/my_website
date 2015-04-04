@@ -312,6 +312,7 @@ def update(id):
     """
     form = forms.PostForm()
     post = models.Post.get(models.Post.id == id)
+    print(post.title)
     if form.validate_on_submit():
         try:
             post.title = form.title.data
@@ -321,15 +322,16 @@ def update(id):
         except:
             result = "Error"
         flash(result)
-        return redirect(url_for("portfolio"))
+        return redirect(url_for("index"))
     else:
         ids = [form.title.id, form.description.id]
-        values = [post.title, post.body]
+        values = [post.title, post.body.replace("\n", "|")]
         context = {
             "form": form,
             "ids": ids,
             "values": values
         }
+        print(context)
         return render_template("update_post.html", **context)
 
 
