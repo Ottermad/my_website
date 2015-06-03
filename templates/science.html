@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Science Candidate Notes</td>
+                <td><a href="{{ url_for("static", filename="cu15metalsnotes.docx") }}">Download</a></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

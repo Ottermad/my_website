@@ -519,6 +519,10 @@ def post_json():
     posts = models.Post.get_posts()[::-1]
     return jsonify(results=posts)
 
+@app.route("/science")
+def science():
+    return render_template("science.html")
+
 if __name__ == "__main__":
     app.jinja_env.filters['remove_space'] = remove_space
     app.run(debug=True)
