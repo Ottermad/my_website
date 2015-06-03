@@ -44,8 +44,13 @@ COLORS = {
 NUMBER_OF_COURSES = 12
 TREEHOUSE_USER = "charliethomas"
 
+key = open("key.txt")
+
 app = Flask(__name__)
-app.secret_key = "nf;en;p"
+app.secret_key = key.readline().strip("\n")
+
+sendgrid_username = key.readline().strip("\n")
+sendgrid_password = key.readline().strip("\n")
 
 login_manager = LoginManager()
 login_manager.init_app(app)

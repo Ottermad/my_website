@@ -1,6 +1,7 @@
 from peewee import (
     Model,
     MySQLDatabase,
+    SqliteDatabase,
     CharField,
     IntegrityError,
     ForeignKeyField,
@@ -11,7 +12,7 @@ from flask.ext.login import UserMixin
 from flask.ext.bcrypt import generate_password_hash
 import datetime
 
-DATABASE = MySQLDatabase("MY_SITE_DB", user="root", passwd="OttersR0ck")
+DATABASE = SqliteDatabase("MY_SITE_DB.db")
 
 
 class BaseModel(Model):
