@@ -34,6 +34,9 @@
             </li>
         {% endfor %}
     </ul>
+    {% if current_user.is_authenticated() %}
+         <button class="btn btn-success btn-lg" onclick="location.href='{{ url_for("new_project") }}'">Add A Project</button>
+    {% endif %}
 {% endblock %}
 {% block extra_js %}
     <script>
