@@ -197,10 +197,11 @@ def new_post():
 def new_project():
     form = forms.ProjectForm()
     if form.validate_on_submit():
-        models.Post.create(
+        models.Project.create(
             user_id=g.user.get_id(),
             title=form.title.data.strip(),
-            description=form.description.strip()
+            link=form.link.data.strip(),
+            description=form.description.data.strip()
         )
         flash("Posted! Thanks!", "success")
         return redirect(url_for("index"))
