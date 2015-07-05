@@ -12,10 +12,10 @@ class Project(BaseModel):
     description = TextField()
 
     @classmethod
-    def create_project(cls, title, body, user_id, link):
+    def create_project(cls, title, description, user_id, link):
         cls.create(
             title=title,
-            description=body,
+            description=description,
             link=link,
             user_id=user_id
         )
