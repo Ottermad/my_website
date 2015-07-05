@@ -49,8 +49,9 @@ key = open("key.txt")
 app = Flask(__name__)
 app.secret_key = key.readline().strip("\n")
 
-sendgrid_username = key.readline().strip("\n")
-sendgrid_password = key.readline().strip("\n")
+sendgrid_creds = key.readline().strip("\n")
+sendgrid_username = sendgrid_creds[0]
+sendgrid_password = sendgrid_creds[1]
 print(sendgrid_username, sendgrid_password)
 
 login_manager = LoginManager()
