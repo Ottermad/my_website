@@ -19,40 +19,23 @@ from flask.ext.login import (
     login_user,
 )
 
+from peewee import DoesNotExist
+
 import forms
 import models
 import requests
 import sendgrid
 import markdown
 
-COLORS = {
-    "Ruby": "#F7464A",
-    "Android": "#51B46D",
-    "JavaScript": "#C25975",
-    "Python": "#F092B0",
-    "HTML": "#39ADD1",
-    "CSS": "#3079AB",
-    "PHP": "#7D669E",
-    "Development Tools": "#637A91",
-    "Business": "#F9845B",
-    "iOS": "#53BBB4",
-    "Design": "#E0AB18",
-    "Java": "#2C9676",
-    "WordPress": "#838CC7",
-    "Digital Literacy": "#C38CD4",
-}
-NUMBER_OF_COURSES = 12
-TREEHOUSE_USER = "charliethomas"
-
 key = open("key.txt")
 
 app = Flask(__name__)
 app.secret_key = key.readline().strip("\n")
 
-sendgrid_creds = key.readline().strip("\n")
+sendgrid_creds = key.readline().strip("\n").split()
 sendgrid_username = sendgrid_creds[0]
 sendgrid_password = sendgrid_creds[1]
-print(sendgrid_username, sendgrid_password)
+print(sendgrid_creds, sendgrid_username, sendgrid_password)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -62,71 +45,6 @@ login_manager.login_view = "login"
 # Functions
 def remove_space(string):
     return string.replace(" ","-")
-
-def get_points():
-    try:
-        my_request = requests.get(
-            "http://teamtreehouse.com/{}.json".format(TREEHOUSE_USER)
-        )
-        try:
-            if my_request.status_code == 200:
-                json = my_request.json()  # Get JSON
-                subject_points = json["points"]  # Get points
-                return subject_points
-            else:
-                print("Status Code Error: {}".format(my_request.status_code))
-        except:
-            # Error parsing json
-            print("Invalid JSON.")
-    except:
-        # Error with url
-        print("Request error.")
-
-
-def get_number_of_subjects():
-    try:
-        my_request = requests.get(
-            "http://teamtreehouse.com/{}.json".format(TREEHOUSE_USER)
-        )
-        try:
-            if my_request.status_code == 200:
-                json = my_request.json()  # Get JSON
-                subject_points = json["points"]  # Get points
-                return len(subject_points)
-            else:
-                print("Status Code Error: {}".format(my_request.status_code))
-        except:
-            # Error parsing json
-            print("Invalid JSON.")
-    except:
-        # Error with url
-        print("Request error.")
-
-
-def get_courses(number_of_courses):
-    try:
-        my_request = requests.get(
-            "http://teamtreehouse.com/{}.json".format(TREEHOUSE_USER)
-        )
-        try:
-            if my_request.status_code == 200:
-                json = my_request.json()  # Get JSON
-                badges = json["badges"]  # Get points
-                badges = badges[-number_of_courses:]
-                badges.reverse()
-                return badges
-            else:
-                print("Status Code Error: {}".format(my_request.status_code))
-        except:
-            # Error parsing json
-            print("Invalid JSON.")
-    except:
-        # Error with url
-        print("Request error.")
-
-
-def order_points(points):
-    return sorted(points.items(), key=lambda x: x[1])[::-1]
 
 
 @login_manager.user_loader
@@ -158,16 +76,17 @@ def login():
     if form.validate_on_submit():
         try:
             user = models.User.get(models.User.email == form.email.data)
-        except models.DoesNotExist:
+        except DoesNotExist:
             flash("Your email or password does not exist.", "error")
         else:
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
                 flash("You've been logged in.", "success")
-                return redirect(url_for("index"))
+                return redirect(url_for("posts_blueprint.index"))
             else:
                 flash("Your email or password does not exist.", "error")
     return render_template("login.html", form=form)
+
 
 @app.route("/logout/")
 @app.route("/logout")
@@ -175,11 +94,7 @@ def login():
 def logout():
     logout_user()
     flash("You've been logged out. Come back soon.")
-    return redirect(url_for("index"))
-
-
-
-
+    return redirect(url_for("posts_blueprint.index"))
 
 
 @app.route("/about/")
@@ -187,23 +102,6 @@ def logout():
 def about():
     """Route for about page"""
     return render_template("about.html")
-
-
-
-
-
-@app.route("/points/")
-@app.route("/points")
-def points():
-    """points = order_points(get_points())
-    courses = get_courses(NUMBER_OF_COURSES)
-    context = {
-        "points": points,
-        "courses": courses,
-        "colors": COLORS,
-        "username": TREEHOUSE_USER,
-    }"""
-    return render_template("points.html", username=TREEHOUSE_USER)
 
 
 @app.route("/contact/", methods=["POST", "GET"])
@@ -221,26 +119,34 @@ def contact():
         message.set_from(sender)
         message.set_subject(subject)
         message.set_html(body)
-        sendgrid_object.send(message)
+        r = sendgrid_object.send(message)
+        print(r)
         flash("Email sent.")
         return redirect(url_for("contact"))
     else:
         return render_template("contact.html", form=form)
 
 
-
-@
-
-@app.route("/post_json/", methods=["POST", "GET"])
-@app.route("/post_json", methods=["POST", "GET"])
-def post_json():
-    posts = models.Post.get_posts()[::-1]
-    return jsonify(results=posts)
-
 @app.route("/science")
 def science():
     return render_template("science.html")
 
+
+from app.posts.views import posts_blueprint
+app.register_blueprint(posts_blueprint)
+
+from app.projects.views import projects_blueprint
+app.register_blueprint(projects_blueprint)
+
+from app.treehouse.views import treehouse_blueprint
+app.register_blueprint(treehouse_blueprint)
+
+app.jinja_env.filters['remove_space'] = remove_space
+
+
+
+"""
 if __name__ == "__main__":
     app.jinja_env.filters['remove_space'] = remove_space
     app.run(debug=True)
+"""

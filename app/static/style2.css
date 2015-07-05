@@ -25,7 +25,10 @@ button, .btn {
 
 .btn-warning {
 	background-color: #FFC107;
+
 }
+
+
 
 .btn-danger {
 	background-color: #F44336;
@@ -33,6 +36,10 @@ button, .btn {
 
 a, a:visited {
 	color: #66BB6A;
+}
+
+a + .btn-warning {
+    color: #FFFFFF;
 }
 
 /* Navigation Styles */

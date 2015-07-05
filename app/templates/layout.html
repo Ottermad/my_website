@@ -5,12 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Charles Thomas">
         <meta name="description" content="The personal blog and site of a teenage developer.">
-        <!--<link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="bootstrap.min.css") }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="bootstrap-theme.min.css") }}">
-        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="flat-ui.min.css") }}">-->
         <link href='http://fonts.googleapis.com/css?family=Arvo:400,400italic' rel='stylesheet' type='text/css'>
-        <!--<link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="normalize.css") }}">-->
         <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="style2.css") }}">
         <title>{% block title %}Charles Thomas | Developer {% endblock %}</title>
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
@@ -44,7 +39,7 @@
                         <div class="v-box">
                             <ul class="">
                                 <li>
-                                    <a href="{{ url_for("index") }}">
+                                    <a href="{{ url_for("posts_blueprint.index") }}">
                                         BLOG
                                     </a>
                                 </li>
@@ -54,12 +49,12 @@
                                     </a> 
                                 </li>
                                 <li>
-                                    <a href="{{ url_for("portfolio") }}">
+                                    <a href="{{ url_for("projects_blueprint.portfolio") }}">
                                         PORTFOLIO
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ url_for("points") }}">
+                                    <a href="{{ url_for("treehouse_blueprint.points") }}">
                                         TEAM TREEHOUSE
                                     </a>
                                 </li>

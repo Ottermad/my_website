@@ -1,4 +1,4 @@
-from flask import Blueprint, g, redirect, url_for, render_template, flash, Markup
+from flask import Blueprint, g, redirect, url_for, render_template, flash, Markup, jsonify
 
 from flask.ext.login import login_required
 
@@ -38,9 +38,10 @@ def post(id):
         "title": title,
         "posted_at": posted_at,
         "body": safe_html_body,
-        "url": url_for("post", id=id)
+        "url": url_for("posts_blueprint.post", id=id)
     }
     return render_template("post.html", **context)
+
 
 @posts_blueprint.route("/update/<id>/", methods=["POST", "GET"])
 @posts_blueprint.route("/update/<id>", methods=["POST", "GET"])
@@ -77,9 +78,9 @@ def update(id):
         except:
             result = "Error"
         flash(result)
-        return redirect(url_for("index"))
+        return redirect(url_for("posts_blueprint.index"))
     else:
-        ids = [form.title.id, form.description.id]
+        ids = [form.title.id, form.body.id]
         body = post.body.replace("\n", "|").replace("\r", "")
         print(body)
         values = [post.title, body]
@@ -103,7 +104,7 @@ def delete(id):
     except:
         result = "Error."
     flash(result)
-    return redirect(url_for("index"))
+    return redirect(url_for("posts_blueprint.index"))
 
 
 @posts_blueprint.route("/add/", methods=["POST", "GET"])
@@ -141,6 +142,12 @@ def add():
         except:
             result = "Error."
         flash(result)
-        return redirect(url_for("index"))
+        return redirect(url_for("posts_blueprint.index"))
     else:
         return render_template("add_post.html", form=form)
+
+@posts_blueprint.route("/post_json/", methods=["POST", "GET"])
+@posts_blueprint.route("/post_json", methods=["POST", "GET"])
+def post_json():
+    posts = Post.get_posts()[::-1]
+    return jsonify(results=posts)

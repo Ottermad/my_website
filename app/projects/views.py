@@ -62,7 +62,7 @@ def update_project(id):
         except:
             result = "error"
         flash(result)
-        return redirect(url_for("portfolio"))
+        return redirect(url_for("projects_blueprint.portfolio"))
     else:
         ids = [form.title.id, form.description.id, form.link.id]
         print(repr(project.description))
@@ -98,7 +98,7 @@ def delete_project(id):
     except:
         result = "Error."
     flash(result)
-    return redirect(url_for("portfolio"))
+    return redirect(url_for("projects_blueprint.portfolio"))
 
 
 @projects_blueprint.route("/add_project/", methods=["POST", "GET"])
@@ -134,6 +134,6 @@ def add_project():
             user_id=g.user.get_id()
         )
         flash(result)
-        return redirect(url_for("portfolio"))
+        return redirect(url_for("projects_blueprint.portfolio"))
     else:
         return render_template("add_project.html", form=form)
