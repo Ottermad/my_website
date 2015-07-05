@@ -19,17 +19,6 @@ class LoginForm(Form):
     password = PasswordField("Password", validators=[DataRequired()])
 
 
-class ProjectForm(Form):
-    title = StringField("Title", validators=[DataRequired()])
-    link = StringField("URL", validators=[DataRequired()])
-    description = TextAreaField("Description", validators=[DataRequired()])
-
-
-class PostForm(Form):
-    title = StringField("Title", validators=[DataRequired()])
-    description = TextAreaField("Description", validators=[DataRequired()])
-
-
 class ContactForm(Form):
     name = StringField("Name",validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired(), Email()])
