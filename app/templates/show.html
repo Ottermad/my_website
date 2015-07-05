@@ -10,7 +10,7 @@
                     </td>
 
                     <td>
-                        <button class="btn btn-info btn-lg" onclick="location.href='{{ url_for("post", id=post.id) }}'">
+                        <button class="btn btn-info btn-lg" onclick="location.href='{{ url_for("posts_blueprint.post", id=post.id) }}'">
                             View
                         </button>
                     </td>
@@ -18,13 +18,13 @@
                     {% if current_user.is_authenticated() %}
 
                         <td>
-                            <button class="btn btn-warning btn-lg" onclick="location.href='{{ url_for("update", id=post.id) }}'">
+                            <button class="btn btn-warning btn-lg" onclick="location.href='{{ url_for("posts_blueprint.update", id=post.id) }}'">
                                 Edit
                             </button>
                         </td>
 
                         <td>
-                            <button class="btn btn-danger btn-lg" onclick="location.href='{{ url_for("delete", id=post.id) }}'">
+                            <button class="btn btn-danger btn-lg" onclick="location.href='{{ url_for("posts_blueprint.delete", id=post.id) }}'">
                                 Delete
                             </button>
                         </td>
@@ -35,6 +35,6 @@
         </tbody>
     </table>
     {% if current_user.is_authenticated() %}
-        <button class="btn btn-success btn-lg" onclick="location.href='{{ url_for("add") }}'">Add A Post</button>
+        <button class="btn btn-success btn-lg" onclick="location.href='{{ url_for("posts_blueprint.add") }}'">Add A Post</button>
     {% endif %}
 {% endblock %}
