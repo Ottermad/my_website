@@ -59,6 +59,7 @@ a + .btn-warning {
 #site-nav > div > div  > ul > li {
 	display: inline;
 	margin-right: 1em;
+    line-height: 2em;
 }
 
 #site-nav > div > div > ul > li > a, #site-nav > ul > li > a:visited, #site-nav > h1 {
@@ -72,7 +73,6 @@ a + .btn-warning {
     text-align: center;
 }
 .v-wrap:before{
-    content: ..;
     display: inline-block;
     vertical-align: middle;
     width: 0;
@@ -215,6 +215,20 @@ body:before {
 	display: inline;
 	width: 50%;
 	float: left;
+}
+
+#contact-form input {
+    width: 75%;
+    border-radius: 10px;
+    border: 0.1em #000000 solid;
+    padding: 1em;
+}
+
+#contact-form textarea {
+    width: 75%;
+    border-radius: 10px;
+    border: 0.1em #000000 solid;
+    padding: 1em;
 }
 
 #contact-details {

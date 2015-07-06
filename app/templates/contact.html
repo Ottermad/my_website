@@ -2,7 +2,11 @@
 {% extends "layout.html" %}
 {% block body %}
 	<h3>Contact Me</h3>
-	<p>You can contact me using the form below or using one of the methods also listed.</p>
+    <p>
+        Please feel free to contact me if you have any questions, or are looking for a web developer.
+        <br>
+        Contact me using the form below or using one of the methods also listed.
+    </p>
 	<section id="contact-form">
 		 <form method="POST" class="form">
 			{{ form.hidden_tag() }}
@@ -10,7 +14,7 @@
 				{{ render_field(field) }}
 			{% endfor %}
 			<fieldset>
-				<button type="submit" id="submit" class="btn btn-success btn-lg">Contact Us</button>
+				<button type="submit" id="submit" class="btn btn-success btn-lg">Contact Me!</button>
 			</fieldset>
 		</form>
 	</section>
